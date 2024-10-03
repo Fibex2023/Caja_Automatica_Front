@@ -11,13 +11,13 @@ export class VPOSUniversalApiService {
 
   //#-----------------------------Conect to API and Test-----------------------------------#//
   closeAPI(){//Close Conecction to API
-    axios.get(environment.API_URL+'/vpos/terminate')
+    axios.get(environment.API_URL+'/api/donwservice')
     .then(res => console.log(res))
     .catch(err => console.log(err));
   }
 
   statusOK(_dataApi: any){//Test connection to API
-    axios.get(environment.API_URL+'/vpos/ping')
+    axios.get(environment.API_URL+'/api/pingpage')
     .then(res => _dataApi = res).then(res => console.log(res))
     .catch(err => console.log(err));
     //this.closeAPI();
@@ -33,12 +33,12 @@ export class VPOSUniversalApiService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/vpos/metodo',
-            data: {
+            url: environment.API_URL+'/api/requestcard/cardpay/'+_ci+'/'+_amount,
+            /*data: {
               "accion":"tarjeta",
               "montoTransaccion": _amount,
               "cedula": _ci
-            }
+            }*/
           }).then(res => {
               console.log(res);
               resolve(res)
@@ -71,13 +71,13 @@ export class VPOSUniversalApiService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount) && Number.isFinite(_amountD)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/vpos/metodo',
-            data: {
+            url: environment.API_URL+'/api/requestcard/cardwithdonative/'+_ci+'/'+_amount+'/'+_amountD,
+            /*data: {
               "accion":"tarjeta",
               "montoTransaccion": _amount,
               "cedula": _ci,
               "montoDonativo": _amountD
-            }
+            }*/
           }).then(res => {
               console.log(res);
               resolve(res)
@@ -110,13 +110,14 @@ export class VPOSUniversalApiService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/vpos/metodo',
-            data: {
+            url: environment.API_URL+'/api/requestcard/cardwithvterminal/'+_ci+'/'+_amount+'/'+_vTermial,
+            /*data: {
               "accion":"tarjeta",
               "montoTransaccion": _amount,
               "cedula": _ci,
-              "terminalVirtual": _vTermial
-            }
+              "terminalVirtual": _vTermial,
+              "montoDonativo": _amountD
+            }*/
           }).then(res => {
               console.log(res);
               resolve(res)
@@ -150,14 +151,14 @@ export class VPOSUniversalApiService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount) && Number.isFinite(_amountD)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/vpos/metodo',
-            data: {
+            url: environment.API_URL+'/requestcard/cardwithdntvandvtermial/'+_ci+'/'+_amount+'/'+_vTermial+'/'+_amountD,
+            /*data: {
               "accion":"tarjeta",
               "montoTransaccion": _amount,
               "cedula": _ci,
               "terminalVirtual": _vTermial,
               "montoDonativo": _amountD
-            }
+            }*/
           }).then(res => {
               console.log(res);
               resolve(res)
@@ -190,13 +191,13 @@ export class VPOSUniversalApiService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount) && Number.isInteger(_refZelle)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/vpos/metodo',
-            data: {
+            url: environment.API_URL+'/api/requestcard/zelle/'+_ci+'/'+_amount+'/'+_refZelle,
+            /*data: {
               "accion":"tarjeta",
               "montoTransaccion": _amount,
               "cedula": _ci,
               "referencia": _refZelle,
-            }
+            }*/
           }).then(res => {
               console.log(res);
               resolve(res)

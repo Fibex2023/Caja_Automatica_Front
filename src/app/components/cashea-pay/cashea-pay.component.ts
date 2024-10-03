@@ -27,8 +27,8 @@ export class CasheaPayComponent {
   public _dataApi: any;
   public _ApiTest: any;
 
-  public _testAPI(){this._service.statusOK(this._ApiTest);}
-  public _closeAPI(){this._service.closeAPI();}
+  /*public _testAPI(){this._service.statusOK(this._ApiTest);}
+  public _closeAPI(){this._service.closeAPI();}*/
 
   public casheaR(){
     this._service.casheaRequest(this._client.getCiNum(), this._product.getAmount())

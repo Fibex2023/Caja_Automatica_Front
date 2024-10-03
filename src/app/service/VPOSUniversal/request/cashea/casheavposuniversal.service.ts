@@ -9,21 +9,6 @@ export class CasheavposuniversalService {
 
   constructor() { }
 
-  //#-----------------------------Conect to API and Test-----------------------------------#//
-  closeAPI(){//Close Conecction to API
-    axios.get(environment.API_URL+'/vpos/terminate')
-    .then(res => console.log(res))
-    .catch(err => console.log(err));
-  }
-
-  statusOK(_dataApi: any){//Test connection to API
-    axios.get(environment.API_URL+'/vpos/ping')
-    .then(res => _dataApi = res).then(res => console.log(res))
-    .catch(err => console.log(err));
-    //this.closeAPI();
-  }
-  //#--------------------------------------------------------------------------------------#//
-
   //#----------------------------Cashea requests proccess----------------------------------#//
   casheaRequest(_ci: string, _amount: number){ //Pay Cashea Request
 
@@ -33,12 +18,12 @@ export class CasheavposuniversalService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/vpos/metodo_cashea',
-            data: {
+            url: environment.API_URL+'/api/cashea/create/request/'+_ci+'/'+_amount,
+            /*data: {
               "accion":"creacionCashea",
               "montoTransaccion": _amount,
               "cedula": _ci
-            }
+            }*/
           }).then(res => {
               console.log(res);
               resolve(res)
@@ -63,7 +48,7 @@ export class CasheavposuniversalService {
   //#---------------------------------------------------------------------------------------#//
 
   //#----------------------------Cashea requests proccess----------------------------------#//
-  casheaVtrmnlRequest(_ci: string, _amount: number, _vTermial: string){ //Pay Cashea Request with vTerminal
+  casheaVtrmnlRequest(_ci: string, _amount: number, _vTerminal: string){ //Pay Cashea Request with vTerminal
 
     return new Promise((resolve, reject)=>{
       try {
@@ -71,13 +56,13 @@ export class CasheavposuniversalService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/vpos/metodo_cashea',
-            data: {
+            url: environment.API_URL+'/api/cashea/create/request/'+_ci+'/'+_amount+'/'+_vTerminal,
+            /*data: {
               "accion":"creacionCashea",
               "montoTransaccion": _amount,
               "cedula": _ci,
-              "terminalVirtual": _vTermial
-            }
+              "terminalVirtual": _vTerminal
+            }*/
           }).then(res => {
               console.log(res);
               resolve(res)
@@ -110,12 +95,12 @@ export class CasheavposuniversalService {
         if(_id != null && Number.isInteger(_id) && Number.isFinite(_amount)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/vpos/metodo_cashea',
-            data: {
+            url: environment.API_URL+'/api/cashea/order/confirm/'+_id+'/'+_amount,
+            /*data: {
               "accion":"confirmacionCashea",
               "montoTransaccion": _amount,
               "idOrden": _id
-            }
+            }*/
           }).then(res => {
               console.log(res);
               resolve(res)
@@ -140,21 +125,20 @@ export class CasheavposuniversalService {
   //#---------------------------------------------------------------------------------------#//
 
   //#--------------------Cashea Confirmation proccess Vterminal-----------------------------#//
-  casheaVtrmnlConfirm(_id: number, _amount: number, _vTermial: string){ //Pay Cashea Confirmation with vTerminal
+  casheaVtrmnlConfirm(_id: number,  _amount: number, _vTerminal: string){ //Pay Cashea Confirmation with vTerminal
 
     return new Promise((resolve, reject)=>{
       try {
 
-        if(_id != null && Number.isInteger(_id) && Number.isFinite(_amount)) {
+        if(_id != null && Number.isInteger(_id)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/vpos/metodo_cashea',
-            data: {
+            url: environment.API_URL+'/cashea/order/confirm/'+_id+'/'+_amount+'/'+_vTerminal,
+            /*data: {
               "accion":"confirmacionCashea",
-              "montoTransaccion": _amount,
               "idOrden": _id,
-              "terminalVirtual": _vTermial
-            }
+              "terminalVirtual": _vTerminal
+            }*/
           }).then(res => {
               console.log(res);
               resolve(res)
@@ -178,7 +162,7 @@ export class CasheavposuniversalService {
   }
   //#---------------------------------------------------------------------------------------#//
 
-  //#---------------------Cashea Cancelation proccess Vterminal-----------------------------#//
+  //#--------------------------Cashea Cancelation proccess----------------------------------#//
   casheaCancel( _numSeqOrder: number){ //Pay Cashea Cancel
 
     return new Promise((resolve, reject)=>{
@@ -187,11 +171,11 @@ export class CasheavposuniversalService {
         if(Number.isInteger(_numSeqOrder)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/vpos/metodo_cashea',
-            data: {
+            url: environment.API_URL+'/api/cashea/order/cancel/'+_numSeqOrder,
+            /*data: {
               "accion":"cancelacionCashea",
               "numSeqOrden": _numSeqOrder,
-            }
+            }*/
           }).then(res => {
               console.log(res);
               resolve(res)
@@ -224,12 +208,12 @@ export class CasheavposuniversalService {
         if( _vTermial != null && _vTermial != ''  && Number.isFinite(_numSeqOrder)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/vpos/metodo_cashea',
-            data: {
+            url: environment.API_URL+'/api/cashea/order/cancel/'+_numSeqOrder+'/'+_vTermial,
+            /*data: {
               "accion":"cancelacionCashea",
               "numSeqOrden": _numSeqOrder,
               "terminalVirtual": _vTermial
-            }
+            }*/
           }).then(res => {
               console.log(res);
               resolve(res)

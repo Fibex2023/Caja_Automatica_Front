@@ -17,10 +17,10 @@ printLastVoucher(){ //Print the Last Voucher
     try {
       axios({
         method: 'post',
-        url: environment.API_URL+'/vpos/metodo',
-        data: {
+        url: environment.API_URL+'/api/adminstrative/print/lastvaouvher',
+        /*data: {
           "accion":"imprimeUltimoVoucher"
-        }
+        }*/
       }).then(res => {
           console.log(res);
           resolve(res)
@@ -48,10 +48,10 @@ printLastVoucherP(){ //Print the last processed voucher
     try {
       axios({
         method: 'post',
-        url: environment.API_URL+'/vpos/metodo',
-        data: {
+        url: environment.API_URL+'/api/adminstrative/print/lastvaouvher/processed',
+        /*data: {
           "accion":"imprimeUltimoVoucherP"
-        }
+        }*/
       }).then(res => {
           console.log(res);
           resolve(res)
@@ -79,10 +79,10 @@ pre_closeCashRegister(){ //Pre-closing of cash register
     try {
       axios({
         method: 'post',
-        url: environment.API_URL+'/vpos/metodo',
-        data: {
+        url: environment.API_URL+'/api/administrative/closingbox/pre-closing',
+        /*data: {
           "accion":"precierre"
-        }
+        }*/
       }).then(res => {
           console.log(res);
           resolve(res)
@@ -110,10 +110,10 @@ closeCashRegister(){ //Closing of cash register
     try {
       axios({
         method: 'post',
-        url: environment.API_URL+'/vpos/metodo',
-        data: {
+        url: environment.API_URL+'/api/administrative/closingbox',
+        /*data: {
           "accion":"precierre"
-        }
+        }*/
       }).then(res => {
           console.log(res);
           resolve(res)
@@ -141,10 +141,10 @@ re_printLastCloseVoucher(){ //Reprint of the last Closing Voucher
     try {
       axios({
         method: 'post',
-        url: environment.API_URL+'/vpos/metodo',
-        data: {
+        url: environment.API_URL+'/api/administrative/closingbox/re-print/lastvaucherclosing',
+        /*data: {
           "accion":"UltimoCierre"
-        }
+        }*/
       }).then(res => {
           console.log(res);
           resolve(res)
