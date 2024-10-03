@@ -1,0 +1,63 @@
+<section class="container position-relative text-center m-auto w-100">
+  <form class="form-floating w-auto m-5" id="formToProcessBill">
+    <!--Accordion to expand the form-->
+    <div class="accordion">
+      <div class="accordion-item border border-dark">
+        <h2 class="h3 m-3 w-auto text-center text-wrap">{{titleC}}</h2><!--Title H1-->
+
+        <div class="container">
+          <div class="accordion-body">
+            <!--Form to process bill-->
+            <div class="form-control w-auto m-auto border border-0">
+              <!--Enter data requested from the client-->
+              <div class="form-floating m-3">
+                <input type="text" class="form-control" id="nameCl" required minlength="2" disabled value="Jose">
+                <label for="nameCl">Nombre del Cliente</label>
+              </div>
+
+              <div class="form-floating m-3">
+                <input type="text" class="form-control" id="ciNum" required minlength="7" maxlength="9" size="10" disabled value="13589996">
+                <label for="ciNum">Número de Cédula</label>
+              </div>
+              <!--Enter data requested from the client-->
+
+              <!--List of items to buy like a table-->
+              <div class="m-3" id="">
+                <div class="card card-body ">
+                  <div class="input-group"><!--Item Totals Cost-->
+                    <input type="text" value="Total a pagar" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                    <span class="input-group-text">Bs.</span>
+                    <span id="totalCost" class="input-group-text" style="width: 20%;">2000.00</span>
+                  </div>
+                </div>
+              </div>
+              <!--List of items to buy like a table-->
+
+              <!--Select Metohd to pay-->
+              <div class="container text-center row">
+
+                <div class="col-md-12">
+                  <button type="submit" class="btn btn-success">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M560-440q-50 0-85-35t-35-85q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35ZM280-320q-33 0-56.5-23.5T200-400v-320q0-33 23.5-56.5T280-800h560q33 0 56.5 23.5T920-720v320q0 33-23.5 56.5T840-320H280Zm80-80h400q0-33 23.5-56.5T840-480v-160q-33 0-56.5-23.5T760-720H360q0 33-23.5 56.5T280-640v160q33 0 56.5 23.5T360-400Zm440 240H120q-33 0-56.5-23.5T40-240v-440h80v440h680v80ZM280-400v-320 320Z"/>
+                    </svg>
+                    Pagar
+                  </button>
+                </div>
+              </div>
+
+              <div class="row text-end mt-3">
+                <div class="col-md-14 ">
+                  <a href="paymetohd" class="btn btn-danger">Volver</a>
+                </div>
+              </div>
+              <!--Select Metohd to pay-->
+
+            </div>
+            <!--Form to process bill-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+</section>

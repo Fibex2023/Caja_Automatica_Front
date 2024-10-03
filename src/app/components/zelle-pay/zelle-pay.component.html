@@ -1,0 +1,116 @@
+<!--@if(_dataApi){
+  @if(_dataApi.status === 200){
+
+    <div class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Operacion exitosa!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>El pago por tarjeta fue exitoso.</p>
+          </div>
+          <div class="modal-footer">
+            <a href="paymetohd" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  }@else if (_dataApi.status === 400){
+    <div class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Error al ejecutar la operacion</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>El pago por tarjeta no fue exitoso.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+}-->
+
+<section class="container position-relative text-center m-auto w-100">
+  <!--Accordion to expand the form-->
+  <div class="accordion">
+    <div class="accordion-item border border-dark">
+      <h2 class="h3 m-3 w-auto text-center text-wrap">{{titleZll}}</h2><!--Title H1-->
+      <div class="container">
+        <div class="accordion-body">
+          <div class="form-control w-auto m-auto border border-0">
+            <!--Form to process bill-->
+            <div class="form-floating m-3">
+              <input type="text" class="form-control" id="nameCl" required minlength="2" disabled value="{{_client.getNameCl()}}">
+              <label for="nameCl">Nombre del Cliente</label>
+            </div>
+
+            <div class="form-floating m-3">
+              <input type="text" class="form-control" id="ciNum" required minlength="7" maxlength="9" size="10" disabled value="{{_client.getCiNum()}}">
+              <label for="ciNum">Número de Cédula</label>
+            </div>
+
+            <div class="form-floating m-3">
+              <input type="number" class="form-control" id="refZelle" required minlength="7" maxlength="9" size="10" onchange="" value="{{_client.getRefZelle()}}">
+              <label for="refZelle">Número de Referencia Zelle</label>
+            </div>
+            <!--Enter data requested from the client-->
+
+            <!--List of items to buy like a table-->
+            <div class="m-3" id="">
+              <div class="card card-body ">
+                <div class="input-group"><!--Item Totals Cost-->
+                  <input type="text" value="Total a pagar" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                  <span class="input-group-text">Bs.</span>
+                  <input id="amount" type="number" class="input-group-text" style="width: 20%;" disabled value="{{_product.getAmount()}}">
+                </div>
+              </div>
+            </div>
+            <!--List of items to buy like a table-->
+
+            <div class="container text-center row">
+
+              <div class="col-md-12">
+                <button type="submit" class="btn btn-primary" (click)="_zelleRequest()">
+                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24px" height="24px" viewBox="0,0,256,256">
+                    <g fill="#fff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                      <g transform="scale(16,16)">
+                        <path d="M3.5,2c-0.8,0 -1.5,0.7 -1.5,1.5v9c0,0.8 0.7,1.5 1.5,1.5h9c0.8,0 1.5,-0.7 1.5,-1.5v-9c0,-0.8 -0.7,-1.5 -1.5,-1.5zM3.5,3h9c0.3,0 0.5,0.2 0.5,0.5v9c0,0.3 -0.2,0.5 -0.5,0.5h-9c-0.3,0 -0.5,-0.2 -0.5,-0.5v-9c0,-0.3 0.2,-0.5 0.5,-0.5z"></path>
+                        <path d="M10.3,6.2c0,0 0.1,-0.1 0.1,-0.2v-0.7c0,-0.2 -0.1,-0.3 -0.3,-0.3h-1.4v-0.9l-0.1,-0.1h-1c-0.1,0 -0.2,0.1 -0.2,0.1v0.9h-1.3c-0.2,0 -0.3,0.1 -0.3,0.3v0.7c0,0.2 0.1,0.3 0.3,0.3h2.3l-2.7,3.4v0c0,0 -0.1,0.1 -0.1,0.2v0.7c0,0.2 0.1,0.3 0.3,0.3h1.5v1c0,0.1 0.1,0.1 0.1,0.1h1c0.1,0 0.1,-0.1 0.1,-0.1v-1h1.4c0.2,0 0.3,-0.1 0.3,-0.3v-0.7c0,-0.2 -0.1,-0.3 -0.3,-0.3h-2.4l2.7,-3.4z"></path>
+                      </g>
+                    </g>
+                  </svg>
+                  Pagar
+                </button>
+              </div>
+            </div>
+
+            <!--Select Metohd to pay-->
+            <div class="row text-end mt-3">
+              <div class="col-md-14 ">
+                <a href="paymetohd" class="btn btn-danger">Volver</a>
+              </div>
+            </div>
+
+            <!--div class="row text-end mt-3">
+              <div class="col-md-14 ">
+                <a (click)="_testAPI()" class="btn btn-danger">testAPI</a>
+              </div>
+            </div-->
+            <!--Select Metohd to pay-->
+
+          </div>
+          <!--Form to process bill-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

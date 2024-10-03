@@ -1,0 +1,79 @@
+@if(_dataApi){
+  @if(_dataApi.status.get()  === 200){
+
+    <div class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Operacion exitosa!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>El pago por tarjeta fue exitoso.</p>
+          </div>
+          <div class="modal-footer">
+            <a href="paymetohd" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  }@else if (_dataApi.status.get() === 400){
+    <div class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Error al ejecutar la operacion</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>El pago por tarjeta no fue exitoso.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+}
+
+<section class="container position-relative text-center m-auto w-100">
+  <!--Accordion to expand the form-->
+  <div class="accordion">
+    <div class="accordion-item border border-dark">
+      <h2 class="h3 m-3 w-auto text-center text-wrap">{{titleAdmin}}</h2><!--Title H1-->
+      <div class="container">
+        <div class="accordion-body">
+          <div class="form-control w-auto m-auto border border-0">
+
+            <div class="contanier content-center">
+              <button (click)="lastVchPrnt()" class="col-6 btn btn-outline-secondary m-3" type="button">Imprimir Ultimo Voucher</button>
+              <button (click)="lastVchPrntPrccss()" class="col-6 btn btn-outline-secondary m-3" type="button">Imprimir Ultimo Voucher Procesado</button>
+              <button (click)="preCloseCR()" class="col-6 btn btn-outline-secondary m-3" type="button">Pre-cierre de Caja</button>
+              <button (click)="closeCR()" class="col-6 btn btn-outline-secondary m-3" type="button">Cierre de Caja</button>
+              <button (click)="rePrntLastCloseCR()" class="col-6 btn btn-outline-secondary m-3" type="button">Reimprimir el ultimo Vaoucher de cierre de caja</button>
+            </div>
+
+            <!--Select Metohd to pay-->
+            <div class="row text-end mt-3">
+              <div class="col-md-14 ">
+                <a href="paymetohd" class="btn btn-danger">Volver</a>
+              </div>
+            </div>
+
+            <!--div class="row text-end mt-3">
+              <div class="col-md-14 ">
+                <button type="button" (click)="_testAPI()" class="btn btn-danger">testAPI</button>
+              </div>
+            </div-->
+            <!--Select Metohd to pay-->
+
+          </div>
+          <!--Form to process bill-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

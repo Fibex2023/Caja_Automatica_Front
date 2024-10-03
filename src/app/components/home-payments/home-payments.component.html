@@ -1,0 +1,43 @@
+<app-header></app-header>
+
+@switch (pageNum) {
+
+  @case (-1) {
+    <app-form-bill></app-form-bill>
+  }
+
+  @case (0) {
+    <app-pay-method (namePage)="nameNumber($event)"></app-pay-method>
+  }
+
+  @case (1) {
+    <app-card-pay></app-card-pay>
+  }
+
+  @case (2) {
+    <app-cash-pay></app-cash-pay>
+  }
+
+  @case (3) {
+    <app-zelle-pay></app-zelle-pay>
+  }
+
+  @case (4) {
+    <app-mobile-payment-pay></app-mobile-payment-pay>
+  }
+
+  @case (5) {
+    <app-cashea-pay></app-cashea-pay>
+  }
+
+  @case (6) {
+    <app-administrative-view></app-administrative-view>
+  }
+
+  @default {
+    <h1>Pagina no disponible</h1>
+  }
+
+}
+
+<app-footer></app-footer>

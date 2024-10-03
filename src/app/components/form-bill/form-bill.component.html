@@ -1,0 +1,82 @@
+<section class="container position-relative text-center m-auto w-100">
+  <h1 class="h2 w-auto text-center text-wrap">Crear Factura</h1>
+
+  <form [formGroup]="payCardForm" class="form-floating w-auto m-5" id="formToProcessBill">
+    <!--Accordion to expand the form-->
+    <div class="accordion" id="accordionBillProcces">
+      <div class="accordion-item border border-dark">
+        <h2 class="accordion-header"><!--Title H1-->
+          <button class="accordion-button collapsed text-dark-emphasis bg-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Facturar
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionBillProcces">
+          <div class="accordion-body">
+            <!--Form to process bill-->
+            <div class="form-control w-auto m-auto border border-0">
+
+              <h3 class="h3 mb-3 fw-normal w-auto text-center">Introduce los datos del Cliente</h3><!--Title H3-->
+
+              <!--Enter data requested from the client-->
+              <div class="form-floating m-3">
+                <input formControlName="nameCl_" type="text" class="form-control" id="nameCl" required minlength="2">
+                <label for="nameCl">Nombre del Cliente</label>
+              </div>
+
+              <div class="form-floating m-3">
+                <input formControlName="ciNum_" type="text" class="form-control" id="ciCNum" required minlength="7" maxlength="9" size="10">
+                <label for="ciCNum">Número de Cédula</label>
+              </div>
+
+              <div class="form-floating m-3">
+                <input formControlName="amount_" type="phone" class="form-control" id="phoneCl" required minlength="10" maxlength="10" size="10">
+                <label for="phoneCl">Número de Teléfono</label>
+              </div>
+              <!--Enter data requested from the client-->
+
+              <!--List of items to buy like a table-->
+              <button (click)="addItem()" class="btn btn-outline-success m-3" type="button">
+                Agregar productos
+              </button>
+
+              <div class="collapsed m-3">
+                <div class="card card-body ">
+                  <div class="input-group"><!--Item like a title-->
+                    <input type="text" value="Nombre del producto" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                    <span class="input-group-text">Bs.</span>
+                    <span class="input-group-text" style="width: 20%;">Costo</span>
+                  </div>
+
+                  @for (item of payCardForm.get('listProduct_')?.value; track $index) {
+
+                    <div class="input-group"><!--Item1 and Cost-->
+                      <input type="text" class="form-control" (change)="item.productName = $event.target?.addEventListener">
+                      <span class="input-group-text">Bs.</span>
+                      <input type="number" class="input-group-text" style="width: 20%;" (change)="item.cost = $event.target?.addEventListener">
+                    </div>
+
+                  }
+
+                  <div class="input-group"><!--Item Totals Cost-->
+                    <input type="text" value="TOTAL" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                    <span class="input-group-text">Bs.</span>
+                    <span id="totalCost" class="input-group-text" style="width: 20%;">0.00</span>
+                  </div>
+                </div>
+              </div>
+              <!--List of items to buy like a table-->
+              <div class="col-md-12"></div>
+
+              <button class="btn btn-success add-item m-3" type="submit">
+                Procesar
+              </button>
+            </div>
+            <!--Form to process bill-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Accordion to expand the form-->
+  </form>
+
+</section>

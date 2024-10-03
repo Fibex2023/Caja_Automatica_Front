@@ -1,0 +1,225 @@
+<!--@if(_dataApi){
+  @if(_dataApi.status === 200){
+
+    <div class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Operacion exitosa!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>El pago por tarjeta fue exitoso.</p>
+          </div>
+          <div class="modal-footer">
+            <a href="paymetohd" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  }@else if (_dataApi.status === 400){
+    <div class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Error al ejecutar la operacion</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>El pago por tarjeta no fue exitoso.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+}-->
+
+<section class="container position-relative text-center m-auto w-100">
+  <!--Accordion to expand the form-->
+  <div class="accordion">
+    <div class="accordion-item border border-dark">
+      <h2 class="h3 m-3 w-auto text-center text-wrap">{{titleCashea}}</h2><!--Title H1-->
+      <div class="container">
+        <div class="accordion-body">
+          <div class="form-control w-auto m-auto border border-0">
+            <!--Form to process bill-->
+            <div class="form-floating m-3">
+              <input type="text" class="form-control" id="nameCl" required minlength="2" disabled value="{{_client.getNameCl()}}">
+              <label for="nameCl">Nombre del Cliente</label>
+            </div>
+
+            <div class="form-floating m-3">
+              <input type="text" class="form-control" id="ciNum" required minlength="7" maxlength="9" size="10" disabled value="{{_client.getCiNum()}}">
+              <label for="ciNum">Número de Cédula</label>
+            </div>
+            <!--Enter data requested from the client-->
+
+            <!--List of items to buy like a table-->
+            <div class="m-3" id="">
+              <div class="card card-body ">
+                <div class="input-group"><!--Item Totals Cost-->
+                  <input type="text" value="Total a pagar" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                  <span class="input-group-text">Bs.</span>
+                  <input id="amount" type="number" class="input-group-text" style="width: 20%;" disabled value="{{_product.getAmount()}}">
+                </div>
+              </div>
+            </div>
+            <!--List of items to buy like a table-->
+
+
+            <!--Acordion to select type pay with cashea-->
+            <div class="accordion" id="accordionExample">
+
+              <div class="accordion-item"><!--SIMPLE REQUEST-->
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    Request simple Cashea
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <button type="button" class="btn btn-outline-warning text-black m-3" (click)="casheaR()">
+                      <img width="20" src="https://cdn.prod.website-files.com/632db6924fcc7661685adfa8/63628b4f01c532e406e06bb9_Cashea%20-%20Isotipo%20-%20JPG%20-%201%201.png">
+                      Pagar
+                    </button>
+                  </div>
+                </div>
+              </div><!--SIMPLE REQUEST-->
+
+              <div class="accordion-item"><!--REQUEST WITH VTERMINAL-->
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed bg-ligth" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Pago con Número de caja Cashea
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="input-group">
+                      <input type="text" value="Número de caja" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                      <input id="numberCashR" type="text" class="input-group-text" style="width: 20%;" disabled value="{{_product.getNumCashR()}}">
+                    </div>
+                    <button type="button" class="btn btn-outline-warning text-black m-3" (click)="casheaRvT()">
+                      <img width="20" src="https://cdn.prod.website-files.com/632db6924fcc7661685adfa8/63628b4f01c532e406e06bb9_Cashea%20-%20Isotipo%20-%20JPG%20-%201%201.png">
+                      Pagar
+                    </button>
+                  </div>
+                </div>
+              </div><!--REQUESTWITH VTERMINAL-->
+
+              <div class="accordion-item"><!--CONFIMATION CASHEA REQUEST-->
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Confirmación de Solicitud Cashea
+                  </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="input-group"><!--Item Totals Cost-->
+                      <input type="text" value="Orden ID" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                      <input id="numberCashR" type="text" class="input-group-text" style="width: 20%;" disabled value="{{_casheaData.getIdOrder()}}">
+                    </div>
+                    <button type="button" class="btn btn-outline-warning text-black m-3" (click)="casheaRConfirm()">
+                      <img width="20" src="https://cdn.prod.website-files.com/632db6924fcc7661685adfa8/63628b4f01c532e406e06bb9_Cashea%20-%20Isotipo%20-%20JPG%20-%201%201.png">
+                      Pagar
+                    </button>
+                  </div>
+                </div>
+              </div><!--CONFIMATION CASHEA REQUEST-->
+
+              <div class="accordion-item"><!--CONFIMATION CASHEA REQUEST WITH VTERMINAL-->
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    Confirmación de la solicitud Cashea con número de caja
+                  </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="input-group">
+                      <input type="text" value="Número de caja" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                      <input id="numberCashR" type="text" class="input-group-text" style="width: 20%;" disabled value="{{_product.getNumCashR()}}">
+                    </div>
+                    <div class="input-group">
+                      <input type="text" value="Orden ID" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                      <input id="numberCashR" type="text" class="input-group-text" style="width: 20%;" disabled value="{{_casheaData.getIdOrder()}}">
+                    </div>
+                    <button type="button" class="btn btn-outline-warning text-black m-3" (click)="casheaConfirmvT()">
+                      <img width="20" src="https://cdn.prod.website-files.com/632db6924fcc7661685adfa8/63628b4f01c532e406e06bb9_Cashea%20-%20Isotipo%20-%20JPG%20-%201%201.png">
+                      Pagar
+                    </button>
+                  </div>
+                </div>
+              </div><!--CONFIMATION CASHEA REQUEST WITH VTERMINAL-->
+
+              <div class="accordion-item"><!--CACELANCIÓN CASHEA REQUEST-->
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                    Cancelación de la solicitud Cashea
+                  </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="input-group">
+                      <input type="text" value="Número de Sequencia" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                      <input id="seqNum" type="text" class="input-group-text" style="width: 20%;" disabled value="{{_casheaData.getNumSeq()}}">
+                    </div>
+                    <button type="button" class="btn btn-outline-danger text-black m-3" (click)="_casheaCancel()">
+                      <img width="20" src="https://cdn.prod.website-files.com/632db6924fcc7661685adfa8/63628b4f01c532e406e06bb9_Cashea%20-%20Isotipo%20-%20JPG%20-%201%201.png">
+                      Pagar
+                    </button>
+                  </div>
+                </div>
+              </div><!--CACELANCIÓN CASHEA REQUEST-->
+
+              <div class="accordion-item"><!--CACELANCIÓN CASHEA REQUEST WITH VTERMINAL-->
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                    Cancelación de la solicitud Cashea con número de caja
+                  </button>
+                </h2>
+                <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="input-group">
+                      <input type="text" value="Número de caja" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                      <input id="numberCashR" type="text" class="input-group-text" style="width: 20%;" disabled value="{{_product.getNumCashR()}}">
+                    </div>
+                    <div class="input-group">
+                      <input type="text" value="Número de Sequencia" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                      <input id="seqNum" type="text" class="input-group-text" style="width: 20%;" disabled value="{{_casheaData.getNumSeq()}}">
+                    </div>
+                    <button type="button" class="btn btn-outline-danger text-black m-3" (click)="_casheaCancelvT()">
+                      <img width="20" src="https://cdn.prod.website-files.com/632db6924fcc7661685adfa8/63628b4f01c532e406e06bb9_Cashea%20-%20Isotipo%20-%20JPG%20-%201%201.png">
+                      Pagar
+                    </button>
+                  </div>
+                </div>
+              </div><!--CACELANCIÓN CASHEA REQUEST WITH VTERMINAL-->
+
+            </div>
+            <!--Acordion to select type pay with cashea-->
+
+            <!--Select Metohd to pay-->
+            <div class="row text-end mt-3">
+              <div class="col-md-14 ">
+                <a href="paymetohd" class="btn btn-danger">Volver</a>
+              </div>
+            </div>
+
+            <!--div class="row text-end mt-3">
+              <div class="col-md-14 ">
+                <a (click)="_testAPI()" class="btn btn-danger">testAPI</a>
+              </div>
+            </div-->
+            <!--Select Metohd to pay-->
+
+          </div>
+          <!--Form to process bill-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

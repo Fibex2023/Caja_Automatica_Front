@@ -1,0 +1,189 @@
+<!--@if(_dataApi){
+  @if(_dataApi.status === 200){
+
+    <div class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Operacion exitosa!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>El pago por tarjeta fue exitoso.</p>
+          </div>
+          <div class="modal-footer">
+            <a href="paymetohd" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  }@else if (_dataApi.status === 400){
+    <div class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Error al ejecutar la operacion</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>El pago por tarjeta no fue exitoso.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+}-->
+
+<section class="container position-relative text-center m-auto w-100">
+  <!--Accordion to expand the form-->
+  <div class="accordion">
+    <div class="accordion-item border border-dark">
+      <h2 class="h3 m-3 w-auto text-center text-wrap">{{titleTDC}}</h2><!--Title H1-->
+      <div class="container">
+        <div class="accordion-body">
+          <div class="form-control w-auto m-auto border border-0">
+            <!--Form to process bill-->
+            <div class="form-floating m-3">
+              <input type="text" class="form-control" id="nameCl" required minlength="2" disabled value="{{_client.getNameCl()}}">
+              <label for="nameCl">Nombre del Cliente</label>
+            </div>
+
+            <div class="form-floating m-3">
+              <input type="text" class="form-control" id="ciNum" required minlength="7" maxlength="9" size="10" disabled value="{{_client.getCiNum()}}">
+              <label for="ciNum">Número de Cédula</label>
+            </div>
+            <!--Enter data requested from the client-->
+
+            <!--List of items to buy like a table-->
+            <div class="m-3" id="">
+              <div class="card card-body ">
+                <div class="input-group"><!--Item Totals Cost-->
+                  <input type="text" value="Total a pagar" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                  <span class="input-group-text">Bs.</span>
+                  <input id="amount" type="number" class="input-group-text" style="width: 20%;" disabled value="{{_product.getAmount()}}">
+                </div>
+              </div>
+            </div>
+            <!--List of items to buy like a table-->
+
+            <!--Acordion to select type pay with card-->
+            <div class="accordion" id="accordionExample">
+
+              <div class="accordion-item"><!--SIMPLE PAY-->
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    Pago simple
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <button type="button" class="btn btn-warning m-3" (click)="_requestCard()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card-fill" viewBox="0 0 16 16">
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1H0zm0 3v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7zm3 2h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1"/>
+                      </svg>
+                      Pagar
+                    </button>
+                  </div>
+                </div>
+              </div><!--SIMPLE PAY-->
+
+              <div class="accordion-item"><!--PAY WITH DONATIVE-->
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed bg-ligth" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Pago con dnoativo
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="input-group"><!--Item Totals Cost-->
+                      <input type="text" value="Donativo de compra" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                      <span class="input-group-text">Bs.</span>
+                      <input id="donative" type="number" class="input-group-text" style="width: 20%;" disabled value="{{_product.getDonativeBuy()}}">
+                    </div>
+                    <button type="button" class="btn btn-warning m-3" (click)="_requestCardDona()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card-fill" viewBox="0 0 16 16">
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1H0zm0 3v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7zm3 2h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1"/>
+                      </svg>
+                      Pagar
+                    </button>
+                  </div>
+                </div>
+              </div><!--PAY WITH DONATIVE-->
+
+              <div class="accordion-item"><!--PAY WITH VTERMINAL-->
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Pago con número de caja
+                  </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="input-group"><!--Item Totals Cost-->
+                      <input type="text" value="Número de caja" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                      <input id="numberCashR" type="text" class="input-group-text" style="width: 20%;" disabled value="{{_product.getNumCashR()}}">
+                    </div>
+                    <button type="button" class="btn btn-warning m-3" (click)="_requestCardCashR()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card-fill" viewBox="0 0 16 16">
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1H0zm0 3v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7zm3 2h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1"/>
+                      </svg>
+                      Pagar
+                    </button>
+                  </div>
+                </div>
+              </div><!--PAY WITH VTERMINAL-->
+
+              <div class="accordion-item"><!--PAY WITH DONATIVE AND VTERMINAL-->
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    Pago con número de caja y donativo
+                  </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="input-group"><!--Item Totals Cost-->
+                      <input type="text" value="Donativo de compra" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                      <span class="input-group-text">Bs.</span>
+                      <input id="donative" type="number" class="input-group-text" style="width: 20%;" disabled value="{{_product.getDonativeBuy()}}">
+                    </div>
+                    <div class="input-group"><!--Item Totals Cost-->
+                      <input type="text" value="Número de caja" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" disabled>
+                      <input id="numberCashR" type="text" class="input-group-text" style="width: 20%;" disabled value="{{_product.getNumCashR()}}">
+                    </div>
+                    <button type="button" class="btn btn-warning m-3" (click)="_requestCardDonaCashR()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card-fill" viewBox="0 0 16 16">
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1H0zm0 3v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7zm3 2h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1"/>
+                      </svg>
+                      Pagar
+                    </button>
+                  </div>
+                </div>
+              </div><!--PAY WITH DONATIVE AND VTERMINAL-->
+            </div>
+            <!--Acordion to select type pay with card-->
+
+            <!--Select Metohd to pay-->
+            <div class="row text-end mt-3">
+              <div class="col-md-14 ">
+                <a href="paymetohd" class="btn btn-danger">Volver</a>
+              </div>
+            </div>
+
+            <!--div class="row text-end mt-3">
+              <div class="col-md-14 ">
+                <button type="button" (click)="_testAPI()" class="btn btn-danger">testAPI</button>
+              </div>
+            </div-->
+            <!--Select Metohd to pay-->
+
+          </div>
+          <!--Form to process bill-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
