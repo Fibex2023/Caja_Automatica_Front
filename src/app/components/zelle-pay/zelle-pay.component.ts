@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../layouts/header/header.component';
-import { VPOSUniversalApiService } from '../../service/VPOSUniversal/request/vposuniversal-api.service';
-import { Client } from '../../class/client/client';
-import { BuyProduct } from '../../class/buyProduct/buy-product';
+import { HeaderComponent } from '@layouts/header/header.component';
+import { VPOSUniversalApiService } from '@service/VPOSUniversal/request/vposuniversal-api.service';
+import { Client } from '@class/client/client';
+import { BuyProduct } from '@class/buyProduct/buy-product';
 
 @Component({
   selector: 'app-zelle-pay',

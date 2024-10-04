@@ -4,6 +4,7 @@ export class BuyProduct {
   private totalCost = 250.30;
   private donativeBuy = 36.63;
   private numCashR = 'Caja01';
+  private typeCoin = 'VES';
 
   /**
    * constructor
@@ -56,31 +57,55 @@ export class BuyProduct {
     }
   }
   /**
-   * SET abd GET donativeBuy
-   */
+ * SET abd GET donativeBuy
+ */
 
-    /**
+  /**
+ * SET abd GET numCashR
+ */
+  public setNumCashR(_numCashR: string) {
+    if(_numCashR != null && _numCashR != ''){
+      this.numCashR = _numCashR;
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
+  public getNumCashR() {
+    if(this.numCashR != null && this.numCashR != ''){
+      return this.numCashR;
+    } else {
+      return 'Not Cash Regitrer';
+    }
+  }
+  /**
    * SET abd GET numCashR
    */
-    public setNumCashR(_numCashR: string) {
-      if(_numCashR != null && _numCashR != ''){
-        this.numCashR = _numCashR;
-        return true;
-      } else {
-        return false;
-      }
 
+  /**
+   * SET abd GET typeCoin
+  */
+  public setTypeCoin(_typeCoin: any) {
+    if(_typeCoin != null && _typeCoin != ''){
+      this.totalCost = _typeCoin;
+      return true;
+    } else {
+      return false;
     }
 
-    public getNumCashR() {
-      if(this.numCashR != null && this.numCashR != ''){
-        return this.numCashR;
-      } else {
-        return 'Not Cash Regitrer';
-      }
+  }
+
+  public getTypeCoin() {
+    if(this.typeCoin != null && this.typeCoin != ''){
+      return this.typeCoin;
+    } else {
+      return 'NaN';
     }
-    /**
-     * SET abd GET totalCost
-     */
+  }
+  /**
+   * SET abd GET typeCoin
+   */
 
 }

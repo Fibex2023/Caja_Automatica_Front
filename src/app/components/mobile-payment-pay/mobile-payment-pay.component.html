@@ -27,7 +27,7 @@
                   <div class="input-group"><!--Item Totals Cost-->
                     <input type="text" value="Total a pagar" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" disabled>
                     <span class="input-group-text">Bs.</span>
-                    <span id="totalCost" class="input-group-text" style="width: 20%;">2000.00</span>
+                    <span id="totalCost" class="input-group-text" style="width: 20%;">{{_product.getAmount()}}</span>
                   </div>
                 </div>
               </div>
@@ -37,7 +37,7 @@
               <div class="container text-center row">
 
                 <div class="col-md-12">
-                  <button type="submit" class="btn btn-dark">
+                  <button type="button" class="btn btn-dark" (click)="_payMobileRequest()">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m680-320-56-56 62-64H480v-80h206l-62-64 56-56 160 160-160 160ZM280-40q-33 0-56.5-23.5T200-120v-720q0-33 23.5-56.5T280-920h400q33 0 56.5 23.5T760-840v160h-80v-40H280v480h400v-40h80v160q0 33-23.5 56.5T680-40H280Zm0-120v40h400v-40H280Zm0-640h400v-40H280v40Zm0 0v-40 40Zm0 640v40-40Z"/>
                     </svg>
                     Pagar

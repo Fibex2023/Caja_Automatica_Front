@@ -33,7 +33,7 @@ export class VPOSUniversalApiService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/api/requestcard/cardpay/'+_ci+'/'+_amount,
+            url: environment.API_URL+'/api/metodo/request/cardpay/'+_ci+'/'+_amount,
             /*data: {
               "accion":"tarjeta",
               "montoTransaccion": _amount,
@@ -71,7 +71,7 @@ export class VPOSUniversalApiService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount) && Number.isFinite(_amountD)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/api/requestcard/cardwithdonative/'+_ci+'/'+_amount+'/'+_amountD,
+            url: environment.API_URL+'/api/metodo/request/cardwithdonative/'+_ci+'/'+_amount+'/'+_amountD,
             /*data: {
               "accion":"tarjeta",
               "montoTransaccion": _amount,
@@ -110,7 +110,7 @@ export class VPOSUniversalApiService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/api/requestcard/cardwithvterminal/'+_ci+'/'+_amount+'/'+_vTermial,
+            url: environment.API_URL+'/api/metodo/request/cardwithvterminal/'+_ci+'/'+_amount+'/'+_vTermial,
             /*data: {
               "accion":"tarjeta",
               "montoTransaccion": _amount,
@@ -151,7 +151,7 @@ export class VPOSUniversalApiService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount) && Number.isFinite(_amountD)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/requestcard/cardwithdntvandvtermial/'+_ci+'/'+_amount+'/'+_vTermial+'/'+_amountD,
+            url: environment.API_URL+'/metodo/request/cardwithdntvandvtermial/'+_ci+'/'+_amount+'/'+_vTermial+'/'+_amountD,
             /*data: {
               "accion":"tarjeta",
               "montoTransaccion": _amount,
@@ -191,7 +191,7 @@ export class VPOSUniversalApiService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount) && Number.isInteger(_refZelle)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/api/requestcard/zelle/'+_ci+'/'+_amount+'/'+_refZelle,
+            url: environment.API_URL+'/api/metodo/request/zelle/'+_ci+'/'+_amount+'/'+_refZelle,
             /*data: {
               "accion":"tarjeta",
               "montoTransaccion": _amount,
@@ -230,13 +230,13 @@ export class VPOSUniversalApiService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount) && _typeCoin != '') {
           axios({
             method: 'post',
-            url: environment.API_URL+'/vpos/metodo',
-            data: {
+            url: environment.API_URL+'/api/metodo/request/paymentchange/'+_ci+'/'+_amount+'/'+_typeCoin,
+            /*data: {
               "accion": "cambio",
               "montoTransaccion": _amount,
               "cedula": _ci,
               "tipoMoneda": _typeCoin //#Los valores admitidos son: VES (Bolívares), USD (Dólares), EUR (Euro)#//
-            }
+            }*/
           }).then(res => {
               console.log(res);
               resolve(res)
@@ -298,4 +298,42 @@ export class VPOSUniversalApiService {
   }
   //#-------------------------------------------------------------------------------------#//
 
+    //#-------------------------------Avance o Retiro de Efectivo con submenú---------------------------------#//
+    avanceRetiroCashRequest(_ci: string, _amount: number, _retiroAvance: number){ //Open keyboard payment
+
+      return new Promise((resolve, reject)=>{
+        try {
+
+          if(_ci != null && _ci != '' && Number.isFinite(_amount) && Number.isFinite(_retiroAvance)) {
+            axios({
+              method: 'post',
+              url: environment.API_URL+'/vpos/metodo',
+              data: {
+                "accion": "avanceRetiro",
+                "montoTransaccion": _amount,
+                "montoAvanceRetiro": _retiroAvance
+                "cedula": _ci,
+              }
+            }).then(res => {
+                console.log(res);
+                resolve(res)
+              })
+              .catch(err => {
+                console.log(err);
+                reject(err)
+            });
+          }else{
+            reject(new Error('Validacion invalida, verifica los campos e intenta de nuevo.'));
+          }
+
+        } catch (error) {
+          reject(error);
+        }
+
+      });
+
+      //this.closeAPI();
+
+    }
+    //#-------------------------------------------------------------------------------------#//
 }
