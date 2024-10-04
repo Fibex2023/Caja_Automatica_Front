@@ -133,7 +133,7 @@ export class CasheavposuniversalService {
         if(_id != null && Number.isInteger(_id)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/cashea/order/confirm/'+_id+'/'+_amount+'/'+_vTerminal,
+            url: environment.API_URL+'/api/cashea/order/confirm/'+_id+'/'+_amount+'/'+_vTerminal,
             /*data: {
               "accion":"confirmacionCashea",
               "idOrden": _id,
