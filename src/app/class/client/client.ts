@@ -1,7 +1,7 @@
 export class Client {
 
   private nameCl = 'Miguel Rodac';
-  private ciNum = 'V21654665';
+  private ciNum = 'V28052291';
   private phone!: string;
   private refZelle = 4050;
 

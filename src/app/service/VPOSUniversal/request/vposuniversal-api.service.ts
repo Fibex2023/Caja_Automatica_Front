@@ -25,14 +25,14 @@ export class VPOSUniversalApiService {
   //#--------------------------------------------------------------------------------------#//
 
   //#--------------------------------Card pay Simple---------------------------------------#//
-  cardRequest(_ci: string, _amount: number){ //Pay Card Simple
+  cardRequest(_ci: string, _amount: string){ //Pay Card Simple
 
     return new Promise((resolve, reject)=>{
       try {
 
-        if(_ci != null && _ci != '' && Number.isFinite(_amount)) {
+        if(_ci != null && _ci != '' && _amount ) {
           axios({
-            method: 'post',
+            method: 'get',
             url: environment.API_URL+'/api/metodo/request/cardpay/'+_ci+'/'+_amount,
             /*data: {
               "accion":"tarjeta",
@@ -311,7 +311,7 @@ export class VPOSUniversalApiService {
               data: {
                 "accion": "avanceRetiro",
                 "montoTransaccion": _amount,
-                "montoAvanceRetiro": _retiroAvance
+                "montoAvanceRetiro": _retiroAvance,
                 "cedula": _ci,
               }
             }).then(res => {

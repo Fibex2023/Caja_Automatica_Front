@@ -32,7 +32,8 @@ export class CardPayComponent {
 
 
   public _requestCard(){
-    this._service.cardRequest(this._client.getCiNum(), this._product.getAmount());
+    var amount = this._product.getAmount().toLocaleString().replace('.',',')
+    this._service.cardRequest(this._client.getCiNum(), amount);
   }
 
   public _requestCardDona(){
