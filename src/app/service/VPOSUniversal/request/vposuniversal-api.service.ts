@@ -298,42 +298,42 @@ export class VPOSUniversalApiService {
   }
   //#-------------------------------------------------------------------------------------#//
 
-    //#-------------------------------Avance o Retiro de Efectivo con submenú---------------------------------#//
-    avanceRetiroCashRequest(_ci: string, _amount: number, _retiroAvance: number){ //Open keyboard payment
+  /*/#-------------------------------Avance o Retiro de Efectivo con submenú---------------------------------#//
+  avanceRetiroCashRequest(_ci: string, _amount: number, _retiroAvance: number){ //Open keyboard payment
 
-      return new Promise((resolve, reject)=>{
-        try {
+    return new Promise((resolve, reject)=>{
+      try {
 
-          if(_ci != null && _ci != '' && Number.isFinite(_amount) && Number.isFinite(_retiroAvance)) {
-            axios({
-              method: 'post',
-              url: environment.API_URL+'/vpos/metodo',
-              data: {
-                "accion": "avanceRetiro",
-                "montoTransaccion": _amount,
-                "montoAvanceRetiro": _retiroAvance,
-                "cedula": _ci,
-              }
-            }).then(res => {
-                console.log(res);
-                resolve(res)
-              })
-              .catch(err => {
-                console.log(err);
-                reject(err)
-            });
-          }else{
-            reject(new Error('Validacion invalida, verifica los campos e intenta de nuevo.'));
-          }
-
-        } catch (error) {
-          reject(error);
+        if(_ci != null && _ci != '' && Number.isFinite(_amount) && Number.isFinite(_retiroAvance)) {
+          axios({
+            method: 'post',
+            url: environment.API_URL+'/vpos/metodo',
+            data: {
+              "accion": "avanceRetiro",
+              "montoTransaccion": _amount,
+              "montoAvanceRetiro": _retiroAvance,
+              "cedula": _ci,
+            }
+          }).then(res => {
+              console.log(res);
+              resolve(res)
+            })
+            .catch(err => {
+              console.log(err);
+              reject(err)
+          });
+        }else{
+          reject(new Error('Validacion invalida, verifica los campos e intenta de nuevo.'));
         }
 
-      });
+      } catch (error) {
+        reject(error);
+      }
 
-      //this.closeAPI();
+    });
 
-    }
-    //#-------------------------------------------------------------------------------------#//
+    //this.closeAPI();
+
+  }
+  //#-------------------------------------------------------------------------------------#/*/
 }
