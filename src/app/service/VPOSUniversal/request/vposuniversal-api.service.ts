@@ -11,13 +11,13 @@ export class VPOSUniversalApiService {
 
   //#-----------------------------Conect to API and Test-----------------------------------#//
   closeAPI(){//Close Conecction to API
-    axios.get(environment.API_URL+'/api/donwservice')
+    axios.get(environment.API_URL+'/api/donwservice/'+environment.TokenAPILaravel)
     .then(res => console.log(res))
     .catch(err => console.log(err));
   }
 
   statusOK(_dataApi: any){//Test connection to API
-    axios.get(environment.API_URL+'/api/pingpage')
+    axios.get(environment.API_URL+'/api/pingpage/'+environment.TokenAPILaravel)
     .then(res => _dataApi = res).then(res => console.log(res))
     .catch(err => console.log(err));
     //this.closeAPI();
@@ -33,7 +33,7 @@ export class VPOSUniversalApiService {
         if(_ci != null && _ci != '' && _amount ) {
           axios({
             method: 'get',
-            url: environment.API_URL+'/api/metodo/request/cardpay/'+_ci+'/'+_amount,
+            url: environment.API_URL+'/api/metodo/request/cardpay/'+_ci+'/'+_amount+'/'+environment.TokenAPILaravel,
             /*data: {
               "accion":"tarjeta",
               "montoTransaccion": _amount,
@@ -70,8 +70,8 @@ export class VPOSUniversalApiService {
 
         if(_ci != null && _ci != '' && Number.isFinite(_amount) && Number.isFinite(_amountD)) {
           axios({
-            method: 'post',
-            url: environment.API_URL+'/api/metodo/request/cardwithdonative/'+_ci+'/'+_amount+'/'+_amountD,
+            method: 'get',
+            url: environment.API_URL+'/api/metodo/request/cardwithdonative/'+_ci+'/'+_amount+'/'+_amountD+'/'+environment.TokenAPILaravel,
             /*data: {
               "accion":"tarjeta",
               "montoTransaccion": _amount,
@@ -110,7 +110,7 @@ export class VPOSUniversalApiService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/api/metodo/request/cardwithvterminal/'+_ci+'/'+_amount+'/'+_vTermial,
+            url: environment.API_URL+'/api/metodo/request/cardwithvterminal/'+_ci+'/'+_amount+'/'+_vTermial+'/'+environment.TokenAPILaravel,
             /*data: {
               "accion":"tarjeta",
               "montoTransaccion": _amount,
@@ -151,7 +151,7 @@ export class VPOSUniversalApiService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount) && Number.isFinite(_amountD)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/metodo/request/cardwithdntvandvtermial/'+_ci+'/'+_amount+'/'+_vTermial+'/'+_amountD,
+            url: environment.API_URL+'/metodo/request/cardwithdntvandvtermial/'+_ci+'/'+_amount+'/'+_vTermial+'/'+_amountD+'/'+environment.TokenAPILaravel,
             /*data: {
               "accion":"tarjeta",
               "montoTransaccion": _amount,
@@ -191,7 +191,7 @@ export class VPOSUniversalApiService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount) && Number.isInteger(_refZelle)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/api/metodo/request/zelle/'+_ci+'/'+_amount+'/'+_refZelle,
+            url: environment.API_URL+'/api/metodo/request/zelle/'+_ci+'/'+_amount+'/'+_refZelle+'/'+environment.TokenAPILaravel,
             /*data: {
               "accion":"tarjeta",
               "montoTransaccion": _amount,
@@ -230,7 +230,7 @@ export class VPOSUniversalApiService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount) && _typeCoin != '') {
           axios({
             method: 'post',
-            url: environment.API_URL+'/api/metodo/request/paymentchange/'+_ci+'/'+_amount+'/'+_typeCoin,
+            url: environment.API_URL+'/api/metodo/request/paymentchange/'+_ci+'/'+_amount+'/'+_typeCoin+'/'+environment.TokenAPILaravel,
             /*data: {
               "accion": "cambio",
               "montoTransaccion": _amount,
@@ -269,7 +269,7 @@ export class VPOSUniversalApiService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/vpos/metodo',
+            url: environment.API_URL+'/vpos/metodo/'+environment.TokenAPILaravel,
             data: {
               "accion": "tecladoAbierto",
               "montoTransaccion": _amount,

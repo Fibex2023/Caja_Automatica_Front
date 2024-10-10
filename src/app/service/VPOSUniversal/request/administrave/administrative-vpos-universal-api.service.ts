@@ -17,7 +17,7 @@ printLastVoucher(){ //Print the Last Voucher
     try {
       axios({
         method: 'post',
-        url: environment.API_URL+'/api/adminstrative/print/lastvaouvher',
+        url: environment.API_URL+'/api/adminstrative/print/lastvaouvher/'+environment.TokenAPILaravel,
         /*data: {
           "accion":"imprimeUltimoVoucher"
         }*/
@@ -48,7 +48,7 @@ printLastVoucherP(){ //Print the last processed voucher
     try {
       axios({
         method: 'post',
-        url: environment.API_URL+'/api/adminstrative/print/lastvaouvher/processed',
+        url: environment.API_URL+'/api/adminstrative/print/lastvaouvher/processed/'+environment.TokenAPILaravel,
         /*data: {
           "accion":"imprimeUltimoVoucherP"
         }*/
@@ -79,7 +79,7 @@ pre_closeCashRegister(){ //Pre-closing of cash register
     try {
       axios({
         method: 'post',
-        url: environment.API_URL+'/api/administrative/closingbox/pre-closing',
+        url: environment.API_URL+'/api/administrative/closingbox/pre-closing/'+environment.TokenAPILaravel,
         /*data: {
           "accion":"precierre"
         }*/
@@ -110,7 +110,7 @@ closeCashRegister(){ //Closing of cash register
     try {
       axios({
         method: 'post',
-        url: environment.API_URL+'/api/administrative/closingbox',
+        url: environment.API_URL+'/api/administrative/closingbox/'+environment.TokenAPILaravel,
         /*data: {
           "accion":"precierre"
         }*/
@@ -141,7 +141,7 @@ re_printLastCloseVoucher(){ //Reprint of the last Closing Voucher
     try {
       axios({
         method: 'post',
-        url: environment.API_URL+'/api/administrative/closingbox/re-print/lastvaucherclosing',
+        url: environment.API_URL+'/api/administrative/closingbox/re-print/lastvaucherclosing/'+environment.TokenAPILaravel,
         /*data: {
           "accion":"UltimoCierre"
         }*/

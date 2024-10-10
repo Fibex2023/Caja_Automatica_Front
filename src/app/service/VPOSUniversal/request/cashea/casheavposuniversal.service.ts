@@ -18,7 +18,7 @@ export class CasheavposuniversalService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/api/cashea/create/request/'+_ci+'/'+_amount,
+            url: environment.API_URL+'/api/cashea/create/request/'+_ci+'/'+_amount+'/'+environment.TokenAPILaravel,
             /*data: {
               "accion":"creacionCashea",
               "montoTransaccion": _amount,
@@ -56,7 +56,7 @@ export class CasheavposuniversalService {
         if(_ci != null && _ci != '' && Number.isFinite(_amount)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/api/cashea/create/request/'+_ci+'/'+_amount+'/'+_vTerminal,
+            url: environment.API_URL+'/api/cashea/create/request/'+_ci+'/'+_amount+'/'+_vTerminal+'/'+environment.TokenAPILaravel,
             /*data: {
               "accion":"creacionCashea",
               "montoTransaccion": _amount,
@@ -95,7 +95,7 @@ export class CasheavposuniversalService {
         if(_id != null && Number.isInteger(_id) && Number.isFinite(_amount)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/api/cashea/order/confirm/'+_id+'/'+_amount,
+            url: environment.API_URL+'/api/cashea/order/confirm/'+_id+'/'+_amount+'/'+environment.TokenAPILaravel,
             /*data: {
               "accion":"confirmacionCashea",
               "montoTransaccion": _amount,
@@ -133,7 +133,7 @@ export class CasheavposuniversalService {
         if(_id != null && Number.isInteger(_id)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/api/cashea/order/confirm/'+_id+'/'+_amount+'/'+_vTerminal,
+            url: environment.API_URL+'/api/cashea/order/confirm/'+_id+'/'+_amount+'/'+_vTerminal+'/'+environment.TokenAPILaravel,
             /*data: {
               "accion":"confirmacionCashea",
               "idOrden": _id,
@@ -171,7 +171,7 @@ export class CasheavposuniversalService {
         if(Number.isInteger(_numSeqOrder)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/api/cashea/order/cancel/'+_numSeqOrder,
+            url: environment.API_URL+'/api/cashea/order/cancel/'+_numSeqOrder+'/'+environment.TokenAPILaravel,
             /*data: {
               "accion":"cancelacionCashea",
               "numSeqOrden": _numSeqOrder,
@@ -208,7 +208,7 @@ export class CasheavposuniversalService {
         if( _vTermial != null && _vTermial != ''  && Number.isFinite(_numSeqOrder)) {
           axios({
             method: 'post',
-            url: environment.API_URL+'/api/cashea/order/cancel/'+_numSeqOrder+'/'+_vTermial,
+            url: environment.API_URL+'/api/cashea/order/cancel/'+_numSeqOrder+'/'+_vTermial+'/'+environment.TokenAPILaravel,
             /*data: {
               "accion":"cancelacionCashea",
               "numSeqOrden": _numSeqOrder,
