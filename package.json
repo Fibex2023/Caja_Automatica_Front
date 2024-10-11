@@ -19,8 +19,13 @@
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
     "@auth0/angular-jwt": "^5.2.0",
+    "@types/file-saver": "^2.0.7",
     "axios": "^1.7.7",
+    "escpos": "^3.0.0-alpha.6",
+    "fs": "^0.0.1-security",
+    "print-js": "^1.6.0",
     "rxjs": "~7.8.0",
+    "stream-browserify": "^3.0.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
   },
@@ -28,6 +33,7 @@
     "@angular-devkit/build-angular": "^18.2.1",
     "@angular/cli": "^18.2.1",
     "@angular/compiler-cli": "^18.2.0",
+    "@types/escpos": "^2.5.5",
     "@types/jasmine": "~5.1.0",
     "@types/jquery": "^3.5.30",
     "jasmine-core": "~5.2.0",
@@ -36,6 +42,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.5.2"
+    "typescript": "~5.5.2",
+    "vite-plugin-node": "^4.0.0"
   }
 }

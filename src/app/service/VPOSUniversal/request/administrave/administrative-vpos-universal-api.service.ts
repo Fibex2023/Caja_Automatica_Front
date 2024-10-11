@@ -165,5 +165,4 @@ re_printLastCloseVoucher(){ //Reprint of the last Closing Voucher
 }
 //#-----------------------------------------------------------------------------------------#//
 
-
 }
