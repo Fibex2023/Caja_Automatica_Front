@@ -3,16 +3,10 @@ import { HeaderComponent } from '@layouts/header/header.component';
 import { VPOSUniversalApiService } from '@service/VPOSUniversal/request/vposuniversal-api.service';
 import { Client } from '@class/client/client';
 import { BuyProduct } from '@class/buyProduct/buy-product';
-import { HttpClient } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
-// import { VauchersPrintServicesService } from '@service/VPOSUniversal/request/administrave/printVauchers/vauchers-print-services.service';
+// import { HttpClient } from '@angular/common/http';
+// import { HttpClientModule } from '@angular/common/http';
 import { PrintVoucherService } from '@service/print-escpos/print-voucher.service';
-// import { PrintVoucherComponent } from '@components/printvoucher/print-voucher/print-voucher.component';
-//import { ROUTES, RedirectCommand, RouterLink, RouterState } from '@angular/router';
-//import { routes } from '@app.routes';
-// import printJS from 'print-js'
 
-// declare function printPDF(url: string): void; // Declarar la función del plugin
 
 @Component({
   selector: 'app-card-pay',
@@ -23,12 +17,12 @@ import { PrintVoucherService } from '@service/print-escpos/print-voucher.service
 })
 export class CardPayComponent {
 
+
   titleTDC = 'Pagar con Tarjeta.';
 
   constructor (
     private _service: VPOSUniversalApiService,
     private _printer: PrintVoucherService,
-    //private _http: HttpClient
   ){}
 
   // ngOnInit(): void {
@@ -52,6 +46,20 @@ export class CardPayComponent {
     try {
       this._data = await this._service.cardRequest(this._client.getCiNum(), amount);
 
+      const _dataClient = [{
+        'date': '2022-01-15',
+        'refundNumber': this._data.data.numeroReferencia, // Convertir a string
+        'nameClient': 'Miguel',
+        'ciClient': this._data.data.cedula,
+        'abonumber': 'V0067',
+        'describe': 'MENS OCT 2024',
+        'amount': this._data.data.montoTransaccion,
+        'methodPayment': this._data.data.tipoProducto,
+        'totalAmount': this._data.data.montoTransaccion,
+        'saldo': '0',
+        'status': this._data.data.mensajeRespuesta,
+      }];
+
       console.log('My data: '+this._data.data.nombreVoucher);
       console.log('Ref number: '+this._data.data.numeroReferencia);
       console.log('Answer Message: '+this._data.data.mensajeRespuesta);
@@ -60,8 +68,8 @@ export class CardPayComponent {
       console.log('Number card: '+this._data.data.numeroTarjeta);
       console.log('Amount: '+this._data.data.montoTransaccion);
       console.log('CI: '+this._data.data.cedula);
-        
-      this.printTiket();
+
+      this.generarPDF(_dataClient);
 
       return this._data;
 
@@ -84,9 +92,9 @@ export class CardPayComponent {
     this._service.cardRequest_donative(this._client.getCiNum(), this._product.getAmount(), this._product.getDonativeBuy())
   }
 
-  private printTiket() {
-    
-    this._printer.printText('Imprime pues');
+  generarPDF(_dataClient: any) {
+
+    this._printer.printTitek(_dataClient);
 
   }
 

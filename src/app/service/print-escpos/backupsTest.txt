@@ -1,0 +1,356 @@
+// import { Injectable } from '@angular/core';
+// import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+// import { print } from 'pdf-to-printer';
+// import { saveAs } from 'file-saver'; // Importa FileSaver
+
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class PrintVoucherService {
+//   private tempFilePath: string = 'Nuevo.pdf'; // Ruta temporal para guardar el archivo
+
+//   async createPDF(nombreCliente: string, cedulaCliente: string): Promise<void> {
+//     const pdfDoc = await PDFDocument.create();
+//     const pageHeight = 210; // Altura de la página en puntos
+//     const page = pdfDoc.addPage([58 * 2.83465, pageHeight]); // Tamaño de la página en puntos
+//     const { height } = page.getSize();
+
+//     const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+
+//     let yPosition = height - 10;
+//     const fontSize = 8;
+
+//     const contents = [
+//       '----------- TICKET -----------',
+//       'Nombre de la Tienda: CORPORACION FIBEXTELECOM C.A.',
+//       `Nombre del Cliente: ${nombreCliente}`,
+//       `Cédula del Cliente: ${cedulaCliente}`,
+//       'Dirección: SECT LOS COLORADOS # 103-5, VALENCIA',
+//       `Fecha: ${new Date().toLocaleString()}`,
+//       'Recibo de Pago: 447913',
+//       'Nro Abonado: V66979',
+//       '------------------------------',
+//       'Descripción: MENS. OCT 2024',
+//       'Monto: $21,56 USD / 811,75 BS',
+//       'Forma de Pago: TARJETA DE DEBITO',
+//       'Total Recibo: $21,56 USD / 811,75 BS',
+//       'Saldo Actual: -1,17 USD / -44,05 BS',
+//       'Gracias por su pago!',
+//       'Fibex Telecom C.A.',
+//       '¡EL INTERNET QUE SI FUNCIONA!',
+//     ];
+
+//     contents.forEach(text => {
+//       page.drawText(text, { x: 10, y: yPosition, size: fontSize, font: timesRomanFont, color: rgb(0, 0, 0) });
+//       yPosition -= fontSize + 2;
+//     });
+
+//     const pdfBytes = await pdfDoc.save();
+//     const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+//     const url = URL.createObjectURL(blob);
+
+//     // Guardar el archivo temporalmente (esto es solo para referencia, no se guarda en el sistema de archivos)
+//     const a = document.createElement('a');
+//     a.href = url;
+//     a.download = this.tempFilePath;
+//     document.body.appendChild(a);
+//     a.click();
+//     document.body.removeChild(a);
+//     console.log('PDF creado y descargado');
+//   }
+
+//   async printFile(nombreCliente: string, cedulaCliente: string): Promise<void> {
+//     await this.createPDF(nombreCliente, cedulaCliente);
+
+//     // Aquí puedes implementar la lógica para imprimir el archivo si es necesario
+//     // print.print(this.tempFilePath) // Esto no funcionará en el navegador
+//     console.log('Impresión enviada (simulada en el navegador)');
+//   }
+// }
+
+
+
+
+
+
+
+// import { Injectable } from '@angular/core';
+// import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+// import { saveAs } from 'file-saver'; // Importa FileSaver
+// import * as path from 'path-browserify'; // Importar path-browserify
+// import * as print from 'pdf-to-printer';
+
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class PrintVoucherService {
+
+//       // Usar path-browserify para definir el nombre del archivo
+//     fileName = path.basename('ticket.pdf'); // Obtener el nombre del archivo
+
+//   constructor() { }
+
+//   _dataClient = [{
+//     clientName: 'Juan Perez',
+//     ciClient: '123456789',
+//     date: '2022-01-15',
+//     refPay: '1234567890',
+//     AboNumber: '1234567890',
+//     description: 'Servicio de Internet',
+//     damount: '500',
+//     MethodPayment: 'Efectivo',
+//     TotalAmount: '500',
+//     SaldoCurrent: '0'
+//   }];
+
+//   async createPDF(_dataClient: any) {
+//     const pdfDoc = await PDFDocument.create();
+//     const pageHeight = 210; // Altura de la página en puntos
+//     const page = pdfDoc.addPage([58 * 2.83465, pageHeight]); // Tamaño de la página en puntos
+//     const { height } = page.getSize();
+
+//     const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+
+//     let yPosition = height - 10;
+//     const fontSize = 8; // Tamaño de la fuente ajustado
+
+//     const contents = [
+//       '----------- TICKET -----------',
+//       'Nombre de la Tienda: CORPORACION FIBEXTELECOM C.A.',
+//       `Nombre del Cliente: ${_dataClient[0].clientName}`,
+//       `Cédula del Cliente: ${_dataClient[0].ciClient}`,
+//       'Dirección: SECT LOS COLORADOS # 103-5, VALENCIA',
+//       `Fecha: ${_dataClient[0].date}`,
+//       `Recibo de Pago: ${_dataClient[0].refPay}`,
+//       `Nro Abonado: ${_dataClient[0].AboNumber}`,
+//       '------------------------------',
+//       `Descripción: ${_dataClient[0].description}`,
+//       `Monto: ${_dataClient[0].damount}`,
+//       `Forma de Pago: ${_dataClient[0].MethodPayment}`,
+//       `Total Recibo: ${_dataClient[0].TotalAmount}`,
+//       `Saldo Actual: ${_dataClient[0].SaldoCurrent}`,
+//       'Gracias por su pago!',
+//       'Fibex Telecom C.A.',
+//       '¡EL INTERNET QUE SI FUNCIONA!',
+//     ];
+
+//     contents.forEach(text => {
+//       page.drawText(text, { x: 10, y: yPosition, size: fontSize, font: timesRomanFont, color: rgb(0, 0, 0) });
+//       yPosition -= fontSize + 2;
+//     });
+
+//     const pdfBytes = await pdfDoc.save();
+//     const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+
+
+//     saveAs(blob, this.fileName); // Guarda el archivo PDF
+//     console.log('PDF creado y guardado en el navegador');
+
+//     // return fileName; // Retornar el nombre del archivo
+
+//   }
+
+//   // async printFile() {
+//   //   await this.createPDF(this._dataClient);
+//   //   // Aquí puedes implementar la lógica para imprimir el archivo si es necesario
+//   //   console.log('Impresión enviada');
+//   // }
+
+//   async printFile() {
+
+//      await this.createPDF(this._dataClient);
+
+//     print.print(this.fileName)
+//       .then(() => {
+//         // fs.unlink(tempFilePath, (err: any) => {
+//         //   if (err) {
+//         //     console.error('Error al eliminar el archivo temporal:', err);
+//         //   }
+//         // });
+//         console.log('Impresión enviada');
+//       })
+//       .catch((err: any) => {
+//         console.error('Error al imprimir:', err);
+//       });
+//   }
+
+// }
+
+
+
+
+
+//Funciona Pero no imprime y pide que indiques donde guardaras el archivo------------------------------------------------------------
+// import { Injectable } from '@angular/core';
+// import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+// import { saveAs } from 'file-saver'; // Importa FileSaver
+// import * as print from 'pdf-to-printer';
+
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class PrintVoucherService {
+
+//   constructor() { }
+
+//   async createPDF(_dataClient: any) {
+//     const pdfDoc = await PDFDocument.create();
+//     const pageHeight = 210; // Altura de la página en puntos
+//     const page = pdfDoc.addPage([58 * 2.83465, pageHeight]); // Tamaño de la página en puntos
+//     const { height } = page.getSize();
+
+//     const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+
+//     let yPosition = height - 10;
+//     const fontSize = 8; // Tamaño de la fuente ajustado
+
+//     const contents = [
+//       '----------- TICKET -----------',
+//       'Nombre de la Tienda: CORPORACION FIBEXTELECOM C.A.',
+//       `Nombre del Cliente: ${_dataClient[0].clientName}`,
+//       `Cédula del Cliente: ${_dataClient[0].ciClient}`,
+//       'Dirección: SECT LOS COLORADOS # 103-5, VALENCIA',
+//       `Fecha: ${_dataClient[0].date}`,
+//       `Recibo de Pago: ${_dataClient[0].refPay}`,
+//       `Nro Abonado: ${_dataClient[0].AboNumber}`,
+//       '------------------------------',
+//       `Descripción: ${_dataClient[0].description}`,
+//       `Monto: ${_dataClient[0].damount}`,
+//       `Forma de Pago: ${_dataClient[0].MethodPayment}`,
+//       `Total Recibo: ${_dataClient[0].TotalAmount}`,
+//       `Saldo Actual: ${_dataClient[0].SaldoCurrent}`,
+//       'Gracias por su pago!',
+//       'Fibex Telecom C.A.',
+//       '¡EL INTERNET QUE SI FUNCIONA!',
+//     ];
+
+//     contents.forEach(text => {
+//       page.drawText(text, { x: 10, y: yPosition, size: fontSize, font: timesRomanFont, color: rgb(0, 0, 0) });
+//       yPosition -= fontSize + 2;
+//     });
+
+//     const pdfBytes = await pdfDoc.save();
+//     const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+//     const file = saveAs(blob, 'ticket.pdf'); // Guarda el archivo PDF
+//     console.log('PDF creado y guardado en el navegador');
+
+
+
+//     this.printFile(file);
+//   }
+
+//   // async printAndPDF() {
+//   //   file =  await this.createPDF(this._dataClient);
+
+//   //   print.print(file);
+//   //   // Aquí puedes implementar la lógica para imprimir el archivo si es necesario
+//   //   console.log('Impresión enviada');
+//   // }
+
+//   async printFile(fileName: any) {
+
+//     print.print(fileName)
+//       .then(() => {
+//         // fs.unlink(tempFilePath, (err: any) => {
+//         //   if (err) {
+//         //     console.error('Error al eliminar el archivo temporal:', err);
+//         //   }
+//         // });
+//         console.log('Impresión enviada');
+//       })
+//       .catch((err: any) => {
+//         console.error('Error al imprimir:', err);
+//       });
+//   }
+
+// }
+
+
+
+//No copila porque no reconoce las librerias fs  y path
+// import { Injectable } from '@angular/core';
+// import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+// import fs from 'fs-extra';
+// import * as path from 'path';
+// import * as print from 'pdf-to-printer';
+
+// const tempFilePath = path.join(__dirname, 'ticket.pdf'); // Ruta para guardar el archivo temporal
+
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class PrintVoucherService {
+
+//   constructor() { }
+
+//   _dataClient = [{
+//     clientName: 'Juan Perez',
+//     ciClient: '123456789',
+//     date: '2022-01-15',
+//     refPay: '1234567890',
+//     AboNumber: '1234567890',
+//     description: 'Servicio de Internet',
+//     damount: '500',
+//     MethodPayment: 'Efectivo',
+//     TotalAmount: '500',
+//     SaldoCurrent: '0'
+//   }];
+
+//   async createPDF(_dataClient: any) {
+//     const pdfDoc = await PDFDocument.create();
+//     const pageHeight = 210; // Altura de la página en puntos
+//     const page = pdfDoc.addPage([58 * 2.83465, pageHeight]); // Tamaño de la página en puntos
+//     const { height } = page.getSize();
+
+//     const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+
+//     let yPosition = height - 10;
+//     const fontSize = 8; // Tamaño de la fuente ajustado
+
+//     const contents = [
+//       '----------- TICKET -----------',
+//       'Nombre de la Tienda: CORPORACION FIBEXTELECOM C.A.',
+//       `Nombre del Cliente: ${_dataClient[0].clientName}`,
+//       `Cédula del Cliente: ${_dataClient[0].ciClient}`,
+//       'Dirección: SECT LOS COLORADOS # 103-5, VALENCIA',
+//       `Fecha: ${_dataClient[0].date}`,
+//       `Recibo de Pago: ${_dataClient[0].refPay}`,
+//       `Nro Abonado: ${_dataClient[0].AboNumber}`,
+//       '------------------------------',
+//       `Descripción: ${_dataClient[0].description}`,
+//       `Monto: ${_dataClient[0].damount}`,
+//       `Forma de Pago: ${_dataClient[0].MethodPayment}`,
+//       `Total Recibo: ${_dataClient[0].TotalAmount}`,
+//       `Saldo Actual: ${_dataClient[0].SaldoCurrent}`,
+//       'Gracias por su pago!',
+//       'Fibex Telecom C.A.',
+//       '¡EL INTERNET QUE SI FUNCIONA!',
+//     ];
+
+//     contents.forEach(text => {
+//       page.drawText(text, { x: 10, y: yPosition, size: fontSize, font: timesRomanFont, color: rgb(0, 0, 0) });
+//       yPosition -= fontSize + 2;
+//     });
+
+//     const pdfBytes = await pdfDoc.save();
+//     fs.writeFileSync(tempFilePath, pdfBytes);
+//     console.log('PDF creado y guardado en:', tempFilePath);
+//   }
+
+//   async printFile() {
+//     await this.createPDF(this._dataClient);
+
+//     print.print(tempFilePath)
+//       .then(() => {
+//         // fs.unlink(tempFilePath, (err: any) => {
+//         //   if (err) {
+//         //     console.error('Error al eliminar el archivo temporal:', err);
+//         //   }
+//         // });
+//         console.log('Impresión enviada');
+//       })
+//       .catch((err: any) => {
+//         console.error('Error al imprimir:', err);
+//       });
+//   }
+// }
