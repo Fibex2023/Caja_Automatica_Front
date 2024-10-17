@@ -47,16 +47,16 @@ export class CardPayComponent {
       this._data = await this._service.cardRequest(this._client.getCiNum(), amount);
 
       const _dataClient = [{
-        'date': '2022-01-15',
+        'date': '2024-10-17',
         'refundNumber': this._data.data.numeroReferencia, // Convertir a string
         'nameClient': 'Miguel',
         'ciClient': this._data.data.cedula,
-        'abonumber': 'V0067',
+        'abonumber': 'V1242',
         'describe': 'MENS OCT 2024',
         'amount': this._data.data.montoTransaccion,
         'methodPayment': this._data.data.tipoProducto,
-        'totalAmount': this._data.data.montoTransaccion,
-        'saldo': '0',
+        'totalAmount': this._data.data.montoTransaccion+'Bs.',
+        'saldo': '1120.52Bs.',
         'status': this._data.data.mensajeRespuesta,
       }];
 
