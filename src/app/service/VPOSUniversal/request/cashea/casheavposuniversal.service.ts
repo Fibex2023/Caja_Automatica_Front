@@ -10,12 +10,12 @@ export class CasheavposuniversalService {
   constructor() { }
 
   //#----------------------------Cashea requests proccess----------------------------------#//
-  casheaRequest(_ci: string, _amount: number){ //Pay Cashea Request
+  casheaRequest(_ci: string, _amount: string){ //Pay Cashea Request
 
     return new Promise((resolve, reject)=>{
       try {
 
-        if(_ci != null && _ci != '' && Number.isFinite(_amount)) {
+        if(_ci != null && _ci != '' && _amount != null && _amount != '') {
           axios({
             method: 'post',
             url: environment.API_URL+'/api/cashea/create/request/'+_ci+'/'+_amount+'/'+environment.TokenAPILaravel,
@@ -48,12 +48,12 @@ export class CasheavposuniversalService {
   //#---------------------------------------------------------------------------------------#//
 
   //#----------------------------Cashea requests proccess----------------------------------#//
-  casheaVtrmnlRequest(_ci: string, _amount: number, _vTerminal: string){ //Pay Cashea Request with vTerminal
+  casheaVtrmnlRequest(_ci: string, _amount: string, _vTerminal: string){ //Pay Cashea Request with vTerminal
 
     return new Promise((resolve, reject)=>{
       try {
 
-        if(_ci != null && _ci != '' && Number.isFinite(_amount)) {
+        if(_ci != null && _ci != '' && _amount != null && _vTerminal != null) {
           axios({
             method: 'post',
             url: environment.API_URL+'/api/cashea/create/request/'+_ci+'/'+_amount+'/'+_vTerminal+'/'+environment.TokenAPILaravel,
@@ -87,12 +87,12 @@ export class CasheavposuniversalService {
   //#---------------------------------------------------------------------------------------#//
 
   //#--------------------------Cashea Confirmation proccess---------------------------------#//
-  casheaConfirm(_id: number, _amount: number){ //Pay Cashea Confirmation
+  casheaConfirm(_id: number, _amount: string){ //Pay Cashea Confirmation
 
     return new Promise((resolve, reject)=>{
       try {
 
-        if(_id != null && Number.isInteger(_id) && Number.isFinite(_amount)) {
+        if(_id != null && Number.isInteger(_id) && _amount != null) {
           axios({
             method: 'post',
             url: environment.API_URL+'/api/cashea/order/confirm/'+_id+'/'+_amount+'/'+environment.TokenAPILaravel,
@@ -125,7 +125,7 @@ export class CasheavposuniversalService {
   //#---------------------------------------------------------------------------------------#//
 
   //#--------------------Cashea Confirmation proccess Vterminal-----------------------------#//
-  casheaVtrmnlConfirm(_id: number,  _amount: number, _vTerminal: string){ //Pay Cashea Confirmation with vTerminal
+  casheaVtrmnlConfirm(_id: number,  _amount: string, _vTerminal: string){ //Pay Cashea Confirmation with vTerminal
 
     return new Promise((resolve, reject)=>{
       try {

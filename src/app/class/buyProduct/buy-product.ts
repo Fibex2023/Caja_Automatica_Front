@@ -1,8 +1,8 @@
 export class BuyProduct {
 
   private listProduct = new Array;
-  private totalCost = 0.1;
-  private donativeBuy = 0.01;
+  private totalCost = '1230,80';
+  private donativeBuy = '0.01';
   private numCashR = 'Caja01';
   private typeCoin = 'VES';
 
@@ -16,7 +16,7 @@ export class BuyProduct {
    * SET abd GET totalCost
    */
   public setAmount(_totalCost: any) {
-    if(_totalCost != null && Number.isFinite(_totalCost)){
+    if(_totalCost != null){
       this.totalCost = _totalCost;
       return true;
     } else {
@@ -26,10 +26,10 @@ export class BuyProduct {
   }
 
   public getAmount() {
-    if(this.totalCost != null && Number.isFinite(this.totalCost)){
+    if(this.totalCost != null && this.totalCost != ''){
       return this.totalCost;
     } else {
-      return 0;
+      return '0,00';
     }
   }
   /**
@@ -39,8 +39,8 @@ export class BuyProduct {
   /**
    * SET abd GET donativeBuy
    */
-  public setDonativeBuy(_donativeBuy: any) {
-    if(_donativeBuy != null && Number.isInteger(_donativeBuy)){
+  public setDonativeBuy(_donativeBuy: string) {
+    if(_donativeBuy != null && _donativeBuy != ''){
       this.donativeBuy = _donativeBuy;
       return true;
     } else {
@@ -50,10 +50,10 @@ export class BuyProduct {
   }
 
   public getDonativeBuy() {
-    if(this.donativeBuy != null && Number.isFinite(this.donativeBuy)){
+    if(this.donativeBuy != null && this.donativeBuy != ''){
       return this.donativeBuy;
     } else {
-      return 0;
+      return '0,00';
     }
   }
   /**

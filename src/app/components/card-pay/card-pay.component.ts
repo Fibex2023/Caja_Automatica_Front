@@ -42,13 +42,13 @@ export class CardPayComponent {
   public _closeAPI(){this._service.closeAPI();}
 
   async _requestCard(): Promise<any>{
-    var amount = this._product.getAmount().toLocaleString().replace('.',',');
+    // var amount = this._product.getAmount().toLocaleString().replace('.',',');
     try {
-      this._data = await this._service.cardRequest(this._client.getCiNum(), amount);
+      this._data = await this._service.cardRequest(this._client.getCiNum(), this._product.getAmount());
 
       const _dataClient = [{
         'date': '2024-10-17',
-        'refundNumber': this._data.data.numeroReferencia, // Convertir a string
+        'refundNumber': this._data.data.numeroReferencia,
         'nameClient': 'Miguel',
         'ciClient': this._data.data.cedula,
         'abonumber': 'V1242',
@@ -56,7 +56,7 @@ export class CardPayComponent {
         'amount': this._data.data.montoTransaccion,
         'methodPayment': this._data.data.tipoProducto,
         'totalAmount': this._data.data.montoTransaccion+'Bs.',
-        'saldo': '1120.52Bs.',
+        'saldo': '0,00Bs.',
         'status': this._data.data.mensajeRespuesta,
       }];
 
@@ -69,7 +69,18 @@ export class CardPayComponent {
       console.log('Amount: '+this._data.data.montoTransaccion);
       console.log('CI: '+this._data.data.cedula);
 
-      this.generarPDF(_dataClient);
+      // Generar PDF con los datos del comprobante
+      // this.generarPDF(_dataClient);
+
+      // Validación de campos indefinidos
+      const hasUndefinedFields = Object.values(_dataClient[0]).some(value => value === undefined || value === null || value === '');
+
+      if (!hasUndefinedFields) {
+        // Generar PDF con los datos del comprobante
+        this.generarPDF(_dataClient);
+      } else {
+          console.error('Uno o más campos en _dataClient están indefinidos o vacíos.');
+      }
 
       return this._data;
 

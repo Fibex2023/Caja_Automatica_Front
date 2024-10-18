@@ -63,12 +63,12 @@ export class VPOSUniversalApiService {
   //#---------------------------------------------------------------------------------------#//
 
   //#--------------------------------Card pay Donative--------------------------------------#//
-  cardRequest_donative(_ci: string, _amount: number, _amountD: number){ //Pay Card with donative
+  cardRequest_donative(_ci: string, _amount: string, _amountD: string){ //Pay Card with donative
 
     return new Promise((resolve, reject)=>{
       try {
 
-        if(_ci != null && _ci != '' && Number.isFinite(_amount) && Number.isFinite(_amountD)) {
+        if(_ci != null && _ci != '' && _amount != null && _amount != '' && _amountD != null && _amount  != '') {
           axios({
             method: 'get',
             url: environment.API_URL+'/api/metodo/request/cardwithdonative/'+_ci+'/'+_amount+'/'+_amountD+'/'+environment.TokenAPILaravel,
@@ -102,12 +102,12 @@ export class VPOSUniversalApiService {
   //#-------------------------------------------------------------------------------------#//
 
   //#---------------------------Card pay VirtualTerminal----------------------------------#//
-  cardRequest_vTerminal(_ci: string, _amount: number, _vTermial: string){ //Pay Card with donative VirtualTerminal
+  cardRequest_vTerminal(_ci: string, _amount: string, _vTermial: string){ //Pay Card with donative VirtualTerminal
 
     return new Promise((resolve, reject)=>{
       try {
 
-        if(_ci != null && _ci != '' && Number.isFinite(_amount)) {
+        if(_ci != null && _ci != '' && _amount != null && _amount != '' && _vTermial != null && _vTermial != '') {
           axios({
             method: 'post',
             url: environment.API_URL+'/api/metodo/request/cardwithvterminal/'+_ci+'/'+_amount+'/'+_vTermial+'/'+environment.TokenAPILaravel,
