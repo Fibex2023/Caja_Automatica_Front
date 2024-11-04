@@ -1,7 +1,7 @@
 export class BuyProduct {
 
   private listProduct = new Array;
-  private totalCost = '1230,80';
+  private totalCost = '1.000.000,00';
   private donativeBuy = '0.01';
   private numCashR = 'Caja01';
   private typeCoin = 'VES';

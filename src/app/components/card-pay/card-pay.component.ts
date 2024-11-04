@@ -44,18 +44,18 @@ export class CardPayComponent {
   async _requestCard(): Promise<any>{
     // var amount = this._product.getAmount().toLocaleString().replace('.',',');
     try {
-      this._data = await this._service.cardRequest(this._client.getCiNum(), this._product.getAmount());
+      this._data = await this._service.cardRequest(this._client.getCiNum(), '33,500.01');
 
-      const _dataClient = [{
-        'date': '2024-10-17',
+      let _dataClient = [{
+        'date': '2024-10-31',
         'refundNumber': this._data.data.numeroReferencia,
         'nameClient': 'Miguel',
         'ciClient': this._data.data.cedula,
         'abonumber': 'V1242',
         'describe': 'MENS OCT 2024',
-        'amount': this._data.data.montoTransaccion,
+        'amount': '33,500.01',
         'methodPayment': this._data.data.tipoProducto,
-        'totalAmount': this._data.data.montoTransaccion+'Bs.',
+        'totalAmount': '33,500.01Bs.',
         'saldo': '0,00Bs.',
         'status': this._data.data.mensajeRespuesta,
       }];
@@ -71,6 +71,22 @@ export class CardPayComponent {
 
       // Generar PDF con los datos del comprobante
       // this.generarPDF(_dataClient);
+
+      if(_dataClient[0]['status'] === 'SALDO INSUFICIENTE'){
+        _dataClient = [{
+          'date': '2024-10-31',
+          'refundNumber': 'Negadado',
+          'nameClient': 'Miguel',
+          'ciClient': this._data.data.cedula,
+          'abonumber': 'V1242',
+          'describe': 'MENS OCT 2024',
+          'amount': '00.00',
+          'methodPayment': 'Transacción Negada',
+          'totalAmount': '00.00Bs.',
+          'saldo': '0,00Bs.',
+          'status': this._data.data.mensajeRespuesta,
+        }];
+      }
 
       // Validación de campos indefinidos
       const hasUndefinedFields = Object.values(_dataClient[0]).some(value => value === undefined || value === null || value === '');
@@ -96,7 +112,7 @@ export class CardPayComponent {
   }
 
   public _requestCardCashR(){
-    this._service.cardRequest_vTerminal(this._client.getCiNum(), this._product.getAmount(), this._product.getNumCashR())
+    this._service.cardRequest_vTerminal(this._client.getCiNum(), '33,500.01', this._product.getNumCashR())
   }
 
   public _requestCardDonaCashR(){

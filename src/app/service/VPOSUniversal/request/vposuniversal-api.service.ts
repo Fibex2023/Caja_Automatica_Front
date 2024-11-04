@@ -30,7 +30,7 @@ export class VPOSUniversalApiService {
     return new Promise((resolve, reject)=>{
       try {
 
-        if(_ci != null && _ci != '' && _amount ) {
+        if(_ci != null && _ci != '' && _amount != null && _amount != '') {
           axios({
             method: 'get',
             url: environment.API_URL+'/api/metodo/request/cardpay/'+_ci+'/'+_amount+'/'+environment.TokenAPILaravel,
@@ -183,12 +183,12 @@ export class VPOSUniversalApiService {
   //#-------------------------------------------------------------------------------------#//
 
   //#---------------------------------Card pay Zelle--------------------------------------#//
-  zelleRequest(_ci: string, _amount: number,  _refZelle: number){ //Pay Zelle
+  zelleRequest(_ci: string, _amount: string,  _refZelle: number){ //Pay Zelle
 
     return new Promise((resolve, reject)=>{
       try {
 
-        if(_ci != null && _ci != '' && Number.isFinite(_amount) && Number.isInteger(_refZelle)) {
+        if(_ci != null && _ci != '' && _amount != null && _amount != '' && Number.isInteger(_refZelle)) {
           axios({
             method: 'post',
             url: environment.API_URL+'/api/metodo/request/zelle/'+_ci+'/'+_amount+'/'+_refZelle+'/'+environment.TokenAPILaravel,
@@ -222,12 +222,12 @@ export class VPOSUniversalApiService {
   //#-------------------------------------------------------------------------------------#//
 
   //#-----------------------------Pay From change option----------------------------------#//
-  cambioRequest(_ci: string, _amount: number,  _typeCoin: string){ //Pay From change option
+  cambioRequest(_ci: string, _amount: string,  _typeCoin: string){ //Pay From change option
 
     return new Promise((resolve, reject)=>{
       try {
 
-        if(_ci != null && _ci != '' && Number.isFinite(_amount) && _typeCoin != '') {
+        if(_ci != null && _ci != '' && _amount != null && _amount != '' && _typeCoin != '' && _typeCoin != '') {
           axios({
             method: 'post',
             url: environment.API_URL+'/api/metodo/request/paymentchange/'+_ci+'/'+_amount+'/'+_typeCoin+'/'+environment.TokenAPILaravel,
